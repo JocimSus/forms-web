@@ -1,0 +1,14 @@
+services:
+  forms-web:
+    image: jocimsus/forms-web:main
+    container_name: forms-web
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    ports:
+      - 3000:3000
+    networks:
+      - forms-net
+
+networks:
+  forms-net:
+    external: true
