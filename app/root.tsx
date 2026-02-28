@@ -9,6 +9,7 @@ import {
 
 import "./app.css";
 import type { Route } from "./+types/root";
+import { AuthProvider } from "./context/AuthContext";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -24,7 +25,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -39,7 +40,7 @@ export default function App() {
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
-  let stack: string | undefined;
+  let stack: string;
 
   if (isRouteErrorResponse(error)) {
     message = error.status === 404 ? "404" : "Error";

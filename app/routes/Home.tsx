@@ -1,8 +1,11 @@
 import { NavLink } from "react-router";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
+  const { user } = useAuth();
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -15,18 +18,29 @@ export default function Home() {
             Make forms, share, and analyze swiftly.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <NavLink
-              to="/login"
-              className="bg-card text-primary border-border border px-5 py-3 text-sm font-semibold"
-            >
-              Login
-            </NavLink>
-            <NavLink
-              to="/register"
-              className="bg-primary text-primary-foreground px-5 py-3 text-sm font-semibold"
-            >
-              Register
-            </NavLink>
+            {user ? (
+              <NavLink
+                to="/forms"
+                className="bg-primary text-primary-foreground px-5 py-3 text-sm font-semibold"
+              >
+                Go to Dashboard
+              </NavLink>
+            ) : (
+              <>
+                <NavLink
+                  to="/login"
+                  className="bg-card text-primary border-border border px-5 py-3 text-sm font-semibold"
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  to="/register"
+                  className="bg-primary text-primary-foreground px-5 py-3 text-sm font-semibold"
+                >
+                  Register
+                </NavLink>
+              </>
+            )}
           </div>
         </div>
       </main>
