@@ -33,4 +33,6 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/forms-web:main
           platforms: linux/amd64
+          build-args: |
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
         if: github.ref == 'refs/heads/main'
